@@ -30,11 +30,41 @@ private final class EditorChangeCoordinator: CodeEditSourceEditor.TextViewCoordi
     }
 }
 
+/// Whether the editor's language is chosen automatically by the detector, or
+/// pinned to a specific language by the user.
+enum LanguageMode: Equatable {
+    case auto
+    case manual(CodeLanguage)
+}
+
 final class CodeEditorView: NSView {
 
     private var controller: TextViewController!
     private let changeCoordinator = EditorChangeCoordinator()
     private var textChangeDebounceWorkItem: DispatchWorkItem?
+
+    /// UserDefaults key persisting the user's language choice across launches.
+    /// Stores `"auto"` or a `TreeSitterLanguage` raw value (e.g. `"swift"`).
+    private static let languageModeDefaultsKey = "editorLanguageMode"
+
+    /// Current language mode: `.auto` (detector decides) or `.manual(...)`.
+    private(set) var languageMode: LanguageMode = .auto
+
+    /// Last language the detector produced, so resetting to auto can re-apply it.
+    private var lastDetectedLanguage: CodeLanguage = .default
+
+    /// Fired on the main thread whenever the applied language changes, with the
+    /// current language and whether we're in auto mode. Drives the status bar.
+    var onLanguageChange: ((_ language: CodeLanguage, _ isAuto: Bool) -> Void)?
+
+    /// Language currently applied to the editor.
+    var currentLanguage: CodeLanguage { controller.language }
+
+    /// Whether the editor is currently letting the detector choose the language.
+    var isAutoLanguage: Bool {
+        if case .auto = languageMode { return true }
+        return false
+    }
 
     /// Underlying CodeEditTextView text view — for direct manipulation and for
     /// `window.makeFirstResponder(_:)`. NOT an NSTextView.
@@ -115,17 +145,84 @@ final class CodeEditorView: NSView {
             controller.view.topAnchor.constraint(equalTo: topAnchor),
             controller.view.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+
+        restorePersistedLanguageMode()
     }
 
     private func handleTextChange(_ text: String) {
         onTextChange?(text)
 
+        // Debounce, then detect on a background queue so typing never waits on
+        // detection. The result is applied back on the main thread (UI work).
         textChangeDebounceWorkItem?.cancel()
         let workItem = DispatchWorkItem { [weak self] in
-            self?.setLanguage(LanguageDetector.detect(from: text))
+            let detected = LanguageDetector.detect(from: text)
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.lastDetectedLanguage = detected
+                // Only auto-apply when the user hasn't pinned a language.
+                guard self.isAutoLanguage else { return }
+                self.setLanguage(detected)
+                self.onLanguageChange?(detected, true)
+            }
         }
         textChangeDebounceWorkItem = workItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: workItem)
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.15, execute: workItem)
+    }
+
+    // MARK: - Language mode (auto vs. manual override)
+
+    /// Pin the editor to a specific language, ignoring the detector until reset.
+    func overrideLanguage(_ language: CodeLanguage) {
+        languageMode = .manual(language)
+        persistLanguageMode()
+        setLanguage(language)
+        onLanguageChange?(language, false)
+    }
+
+    /// Hand control back to the detector and re-detect the current text now.
+    func resetToAutoLanguage() {
+        languageMode = .auto
+        persistLanguageMode()
+
+        // Apply the most recent guess immediately for a responsive UI...
+        setLanguage(lastDetectedLanguage)
+        onLanguageChange?(lastDetectedLanguage, true)
+
+        // ...then re-run detection on the current text in the background in case
+        // it changed while a manual language was pinned.
+        let text = self.text
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let detected = LanguageDetector.detect(from: text)
+            DispatchQueue.main.async {
+                guard let self = self, self.isAutoLanguage else { return }
+                self.lastDetectedLanguage = detected
+                self.setLanguage(detected)
+                self.onLanguageChange?(detected, true)
+            }
+        }
+    }
+
+    private func persistLanguageMode() {
+        let value: String
+        switch languageMode {
+        case .auto:
+            value = "auto"
+        case .manual(let language):
+            value = language.id.rawValue
+        }
+        UserDefaults.standard.set(value, forKey: Self.languageModeDefaultsKey)
+    }
+
+    private func restorePersistedLanguageMode() {
+        guard let value = UserDefaults.standard.string(forKey: Self.languageModeDefaultsKey),
+              value != "auto",
+              let tsLanguage = TreeSitterLanguage(rawValue: value),
+              let language = CodeLanguage.allLanguages.first(where: { $0.id == tsLanguage }) else {
+            return
+        }
+        languageMode = .manual(language)
+        setLanguage(language)
     }
 
     /// Undo-grouped, multi-range replace. Applies all replacements as a single undo step.

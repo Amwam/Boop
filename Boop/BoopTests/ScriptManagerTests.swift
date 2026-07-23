@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Boop
 
 class ScriptManagerTests: XCTestCase {
     

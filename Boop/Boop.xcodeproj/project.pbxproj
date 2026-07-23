@@ -8,16 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0078AFB4500755ED08509719 /* BoopEditorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC9512F965F0497C7BBA33 /* BoopEditorTheme.swift */; };
-		2C08A74F24B2269C00E1BD83 /* Script+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BC0DC24AAC518009B8631 /* Script+Require.swift */; };
 		2C0BC0DD24AAC518009B8631 /* Script+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BC0DC24AAC518009B8631 /* Script+Require.swift */; };
 		2C0BC0DE24AAC64F009B8631 /* Script+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BC0DC24AAC518009B8631 /* Script+Require.swift */; };
 		2C17C66A24271DDA005C911C /* BoopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17C66924271DDA005C911C /* BoopTests.swift */; };
 		2C17C67224271EBD005C911C /* ScriptManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17C67124271EBD005C911C /* ScriptManagerTests.swift */; };
-		2C17C67324271EE8005C911C /* ScriptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9761DB2214E45300AFF8CD /* ScriptManager.swift */; };
-		2C17C6762427214B005C911C /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9761DE2214E46800AFF8CD /* Script.swift */; };
-		2C17C6772427214D005C911C /* ScriptExecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53B6DF226D404E00DC6861 /* ScriptExecution.swift */; };
-		2C17C67B2427218B005C911C /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20669921FD76900082570E /* StatusView.swift */; };
-		2C17C67C242721C5005C911C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9118B523406B530018916F /* Colors.swift */; };
 		2C20667621FD628E0082570E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20667521FD628E0082570E /* AppDelegate.swift */; };
 		2C20667821FD62910082570E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C20667721FD62910082570E /* Assets.xcassets */; };
 		2C20667B21FD62910082570E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20667921FD62910082570E /* MainMenu.xib */; };
@@ -55,7 +49,6 @@
 		2C60A55624871273006496BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C20667721FD62910082570E /* Assets.xcassets */; };
 		2C60A55724871273006496BA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20667921FD62910082570E /* MainMenu.xib */; };
 		2C60A55824871273006496BA /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5ED41D2357F67200322893 /* Preferences.storyboard */; };
-		2C60A56224871730006496BA /* UpdateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60A4E524870678006496BA /* UpdateTextField.swift */; };
 		2C873BE12697C2A800D9A3F0 /* PopoverContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C873BE02697C2A800D9A3F0 /* PopoverContainerView.swift */; };
 		2C873BE42697C34200D9A3F0 /* PopoverContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C873BE02697C2A800D9A3F0 /* PopoverContainerView.swift */; };
 		2C8BE188249EBB3D00099B73 /* Fuse in Frameworks */ = {isa = PBXBuildFile; productRef = 2C8BE187249EBB3D00099B73 /* Fuse */; };
@@ -77,6 +70,9 @@
 		837428CA09447B349E9FEC3D /* LanguageDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA0C0BEAEA7560A22B25A2 /* LanguageDetector.swift */; };
 		9DB42DA12120C7984915C1E3 /* BoopEditorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CC9512F965F0497C7BBA33 /* BoopEditorTheme.swift */; };
 		A748E4464AA8708A11515E96 /* LanguageDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA0C0BEAEA7560A22B25A2 /* LanguageDetector.swift */; };
+		FA00000000000000000000A2 /* LanguageStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00000000000000000000A1 /* LanguageStatusBar.swift */; };
+		FA00000000000000000000A3 /* LanguageStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00000000000000000000A1 /* LanguageStatusBar.swift */; };
+		FA00000000000000000000B2 /* LanguageDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00000000000000000000B1 /* LanguageDetectorTests.swift */; };
 		FE9914ABC60011DE7C02B479 /* CodeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7CAC5EE9DEEDD9C060F0A1 /* CodeEditorView.swift */; };
 /* End PBXBuildFile section */
 
@@ -153,6 +149,8 @@
 		58AA0C0BEAEA7560A22B25A2 /* LanguageDetector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LanguageDetector.swift; sourceTree = "<group>"; };
 		88CC9512F965F0497C7BBA33 /* BoopEditorTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BoopEditorTheme.swift; sourceTree = "<group>"; };
 		BA7CAC5EE9DEEDD9C060F0A1 /* CodeEditorView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CodeEditorView.swift; sourceTree = "<group>"; };
+		FA00000000000000000000A1 /* LanguageStatusBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LanguageStatusBar.swift; sourceTree = "<group>"; };
+		FA00000000000000000000B1 /* LanguageDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDetectorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +188,7 @@
 				2C17C66924271DDA005C911C /* BoopTests.swift */,
 				2C17C66B24271DDA005C911C /* Info.plist */,
 				2C17C67124271EBD005C911C /* ScriptManagerTests.swift */,
+				FA00000000000000000000B1 /* LanguageDetectorTests.swift */,
 			);
 			path = BoopTests;
 			sourceTree = "<group>";
@@ -276,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				2C20669921FD76900082570E /* StatusView.swift */,
+				FA00000000000000000000A1 /* LanguageStatusBar.swift */,
 				2C20669D21FE445E0082570E /* OverlayView.swift */,
 				2C2066A321FE47CE0082570E /* PopoverView.swift */,
 				2C2066A521FE53870082570E /* SearchField.swift */,
@@ -495,14 +495,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C17C67224271EBD005C911C /* ScriptManagerTests.swift in Sources */,
-				2C17C67B2427218B005C911C /* StatusView.swift in Sources */,
-				2C17C6762427214B005C911C /* Script.swift in Sources */,
-				2C17C67C242721C5005C911C /* Colors.swift in Sources */,
-				2C08A74F24B2269C00E1BD83 /* Script+Require.swift in Sources */,
-				2C17C6772427214D005C911C /* ScriptExecution.swift in Sources */,
-				2C60A56224871730006496BA /* UpdateTextField.swift in Sources */,
+				FA00000000000000000000B2 /* LanguageDetectorTests.swift in Sources */,
 				2C17C66A24271DDA005C911C /* BoopTests.swift in Sources */,
-				2C17C67324271EE8005C911C /* ScriptManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +527,7 @@
 				2CEC93FA249C2D600080B9B8 /* ThemeSettingsViewController.swift in Sources */,
 				2C9761D92214E3B500AFF8CD /* ScriptsTableViewController.swift in Sources */,
 				43D2C4F81B0473C328E9D6C2 /* CodeEditorView.swift in Sources */,
+				FA00000000000000000000A2 /* LanguageStatusBar.swift in Sources */,
 				837428CA09447B349E9FEC3D /* LanguageDetector.swift in Sources */,
 				9DB42DA12120C7984915C1E3 /* BoopEditorTheme.swift in Sources */,
 			);
@@ -565,6 +560,7 @@
 				2C60A54F24871273006496BA /* PreferencesTabViewController.swift in Sources */,
 				2C60A55024871273006496BA /* ScriptsTableViewController.swift in Sources */,
 				FE9914ABC60011DE7C02B479 /* CodeEditorView.swift in Sources */,
+				FA00000000000000000000A3 /* LanguageStatusBar.swift in Sources */,
 				A748E4464AA8708A11515E96 /* LanguageDetector.swift in Sources */,
 				0078AFB4500755ED08509719 /* BoopEditorTheme.swift in Sources */,
 			);
