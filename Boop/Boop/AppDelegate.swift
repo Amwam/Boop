@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SavannaKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -18,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var popoverViewController: PopoverViewController!
     @IBOutlet weak var scriptManager: ScriptManager!
-    @IBOutlet weak var editor: SyntaxTextView!
+    @IBOutlet weak var editor: CodeEditorView!
 
     // Frame auto save name for app window frame restoration.
     private static let appWindowName = "boop.app.window"
@@ -74,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func textServiceHandler(_ pboard: NSPasteboard, userData: String, error: NSErrorPointer) {
         if let string = pboard.string(forType: NSPasteboard.PasteboardType.string) {
-            editor.contentTextView.string = string
+            editor.text = string
         }
     }
 

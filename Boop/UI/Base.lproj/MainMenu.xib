@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -509,13 +509,13 @@ Gw
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="480" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3840" height="2130"/>
             <value key="minSize" type="size" width="480" height="360"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-Na-xwu" customClass="SyntaxTextView" customModule="SavannaKit">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-Na-xwu" customClass="CodeEditorView" customModule="Boop" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Cdf-EW-00p" customClass="OverlayView" customModule="Boop" customModuleProvider="target">
@@ -545,7 +545,7 @@ Gw
                                         <rect key="frame" x="0.0" y="0.0" width="440" height="140"/>
                                         <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="6rM-iC-zg0">
                                             <rect key="frame" x="0.0" y="0.0" width="440" height="140"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="43" rowSizeStyle="automatic" viewBased="YES" id="gde-qM-ZGx" customClass="ScriptTableView" customModule="Boop" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="440" height="140"/>
@@ -577,7 +577,7 @@ Gw
                                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="-2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahi-ZC-6NH">
                                                                             <rect key="frame" x="37" y="3" width="380" height="37"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="llX-0P-Bnw">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="llX-0P-Bnw">
                                                                                     <rect key="frame" x="-2" y="13" width="146" height="24"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Remove Slashes" id="Ctu-ii-q5T">
                                                                                         <font key="font" metaFont="systemLight" size="20"/>
@@ -585,7 +585,7 @@ Gw
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
                                                                                 </textField>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rLt-DR-5JZ">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rLt-DR-5JZ">
                                                                                     <rect key="frame" x="-2" y="0.0" width="90" height="15"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="fOL-j2-H9u">
                                                                                         <font key="font" metaFont="cellTitle"/>
@@ -677,7 +677,7 @@ Gw
                     <constraint firstItem="ibo-QR-zuu" firstAttribute="centerX" secondItem="EiT-Mj-1SZ" secondAttribute="centerX" id="pzh-9k-RgK"/>
                 </constraints>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="487B18E4-7841-45EF-823D-4B59D73956C5" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="Z9T-tu-hzd">
+            <toolbar key="toolbar" implicitIdentifier="487B18E4-7841-45EF-823D-4B59D73956C5" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="Z9T-tu-hzd">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ri3-8q-QoT"/>
                     <toolbarItem implicitItemIdentifier="C5459F48-A2E4-4A46-BA5F-7368C65F8AC9" label="Custom View" paletteLabel="Custom View" tag="-1" sizingBehavior="auto" id="mG6-GU-aNe">
@@ -689,7 +689,7 @@ Gw
                                 <stackView distribution="equalCentering" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nlt-yx-S75">
                                     <rect key="frame" x="4" y="0.0" width="200" height="20"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aib-Zm-MbW">
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aib-Zm-MbW">
                                             <rect key="frame" x="26" y="3" width="148" height="15"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Press ⌘+B to get started" drawsBackground="YES" id="Sc8-Qd-kcQ">
                                                 <font key="font" metaFont="systemLight" size="12"/>
@@ -697,7 +697,7 @@ Gw
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PpN-Z0-jAa" customClass="UpdateTextField" customModule="Boop" customModuleProvider="target">
+                                        <textField hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PpN-Z0-jAa" customClass="UpdateTextField" customModule="Boop" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="6" width="69" height="14"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Learn More" drawsBackground="YES" id="o6X-4x-gie">
                                                 <font key="font" metaFont="systemMedium" size="11"/>

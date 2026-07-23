@@ -7,14 +7,13 @@
 //
 
 import Cocoa
-import SavannaKit
 
 class PopoverViewController: NSViewController {
-    
+
     @IBOutlet weak var overlayView: OverlayView!
     @IBOutlet weak var popoverView: PopoverContainerView!
     @IBOutlet weak var searchField: SearchField!
-    @IBOutlet weak var editorView: SyntaxTextView!
+    @IBOutlet weak var editorView: CodeEditorView!
     @IBOutlet weak var statusView: StatusView!
     
     @IBOutlet weak var scriptManager: ScriptManager!
@@ -144,7 +143,7 @@ class PopoverViewController: NSViewController {
         
         statusView.setStatus(.normal)
         
-        self.view.window?.makeFirstResponder(self.editorView.contentTextView)
+        self.view.window?.makeFirstResponder(self.editorView.textView)
         self.enabled = false
         self.tableHeightConstraint.animator().constant = 0
         
