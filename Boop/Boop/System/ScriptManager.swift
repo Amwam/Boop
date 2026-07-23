@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SavannaKit
 import Fuse
 
 
@@ -139,83 +138,49 @@ class ScriptManager: NSObject {
         }
     }
     
-    func runScript(_ script: Script, into editor: SyntaxTextView) {
-        
+    func runScript(_ script: Script, into editor: CodeEditorView) {
+
         let fullText = editor.text
-        
+
         lastScript = script
-        
-        guard let ranges = editor.contentTextView.selectedRanges as? [NSRange], ranges.reduce(0, { $0 + $1.length }) > 0 else {
-            
-            let insertPosition = (editor.contentTextView.selectedRanges.first as? NSRange)?.location
+
+        let ranges = editor.selectedRanges
+
+        guard ranges.reduce(0, { $0 + $1.length }) > 0 else {
+
+            let insertPosition = ranges.first?.location
             let result = runScript(script, fullText: fullText, insertIndex: insertPosition)
             // No selection, run on full text
-            
-            let unicodeSafeFullTextLength = editor.contentTextView.textStorage?.length ?? fullText.count
+
+            let unicodeSafeFullTextLength = (editor.text as NSString).length
             replaceText(ranges: [NSRange(location: 0, length: unicodeSafeFullTextLength)], values: [result], editor: editor)
-            
+
             return
         }
-        
+
         // Fun fact: You can have multi selections! Which means we need to disable
         // the ability to edit `fullText` while in selection mode, otherwise the
         // some scripts may accidentally run multiple time over the full text.
-        
+
         let values = ranges.map {
             range -> String in
-            
+
             let value = (fullText as NSString).substring(with: range)
-            
+
             return runScript(script, selection: value, fullText: fullText)
-            
+
         }
-        
+
         replaceText(ranges: ranges, values: values, editor: editor)
-        
-        
+
+
     }
-    
-    private func replaceText(ranges: [NSRange], values: [String], editor: SyntaxTextView) {
-        
-        
-        let textView = editor.contentTextView
-        
-        // Since we have to replace each selection one by one, after each
-        // occurence the whole text shifts around a bit, and therefore the
-        // Ranges don't match their original position anymore. So we have
-        // to offset everything based on the previous replacements deltas.
-        // This is pretty straightforward because we know selections can't
-        // overlap, and we sort them so they are always in order.
-        
-        var offset = 0
-        let pairs = zip(ranges, values)
-            .sorted{ $0.0.location < $1.0.location }
-            .map { (pair) -> (NSRange, String) in
-                
-                let (range, value) = pair
-                let length = range.length
-                let newRange = NSRange(location: range.location + offset, length: length)
-                
-                offset += value.count - length
-                return (newRange, value)
-        }
-        
-        
-        guard textView.shouldChangeText(inRanges: ranges as [NSValue], replacementStrings: values) else {
-            return
-        }
-        
-        textView.textStorage?.beginEditing()
-        
-        pairs.forEach {
-            (range, value) in
-            textView.textStorage?.replaceCharacters(in: range, with: value)
-        }
-        
-        
-        textView.textStorage?.endEditing()
-        
-        textView.didChangeText()
+
+    private func replaceText(ranges: [NSRange], values: [String], editor: CodeEditorView) {
+        // `editor.replace(ranges:with:)` is undo-grouped and already offsets
+        // later ranges by earlier replacements' length deltas internally, so
+        // we just pass the original ranges + values straight through.
+        editor.replace(ranges: ranges, with: values)
     }
     
     func runScript(_ script: Script, selection: String? = nil, fullText: String, insertIndex: Int? = nil) -> String {
@@ -227,7 +192,7 @@ class ScriptManager: NSObject {
         return scriptExecution.text ?? ""
     }
     
-    func runScriptAgain(editor: SyntaxTextView) {
+    func runScriptAgain(editor: CodeEditorView) {
         guard let script = lastScript else {
             NSSound.beep()
             return
